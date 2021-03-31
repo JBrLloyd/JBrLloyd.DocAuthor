@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="https://demopublic.blob.core.windows.net/tally-doc-man/shared/css/paper-0.4.1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap"
+          rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.8.0/echarts-en.js"></script>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .FrontPage {
+            background-color: #2C365D;
+        }
+
+        .SecondPage {
+            background-color: white;
+        }
+
+        .OverflowPage {
+            background-color: white;
+            display: none;
+        }
+
+        .titleBox {
+            position: absolute;
+            top: 6mm;
+            right: 1cm;
+            height: 1.35cm;
+            border: 0px solid black;
+            overflow: hidden;
+            text-align: center;
+            align-content: center;
+            color: white;
+            font-size: xx-large;
+            font-weight: 700;
+        }
+
+        .logobox {
+            position: absolute;
+            top: 2mm;
+            width: 374px;
+            height: 105px;
+            left: 5mm;
+            border: 0px solid black;
+            overflow: hidden;
+        }
+
+        .addressBox {
+            position: absolute;
+            top: 3cm;
+            width: 9.0cm;
+            height: 5.25cm;
+            left: 1cm;
+            border: 1px solid black;
+            overflow: hidden;
+            text-align: left;
+            padding-left: 1.5cm;
+            padding-top: 1.5cm;
+            border-radius: 10px;
+            background-color: white;
+            box-sizing: border-box;
+            font-weight: 700;
+        }
+
+
+
+
+        .enquiriesBox {
+            position: absolute;
+            top: 2cm;
+            width: 9cm;
+            height: 3cm;
+            right: 1cm;
+            border: 0px solid black;
+            overflow: hidden;
+            box-sizing: border-box;
+            color: #4EEECA;
+            font-size: small;
+        }
+
+
+        .enquireLine {
+            text-align: right;
+        }
+
+        .enquireLabel {
+            display: inline-block;
+            padding-right: 2mm;
+        }
+
+        .enquireItem {
+            display: inline-block;
+            padding-right: 2mm;
+            color: white;
+            border-bottom: 1px gray dotted;
+            min-width: 34mm;
+        }
+
+        .enquireBreak {
+            padding-left: 1cm;
+        }
+
+
+
+
+        .accountinfoBox {
+            position: absolute;
+            top: 5cm;
+            width: 9cm;
+            height: 4cm;
+            right: 1cm;
+            overflow: hidden;
+            text-align: right;
+        }
+
+
+
+        .accountInfoLabel {
+            display: inline-block;
+            box-sizing: border-box;
+            color: white;
+            width: 36mm;
+            height: 8mm;
+            margin: 1mm, 1mm, 0, 1mm;
+            overflow: hidden;
+            padding-top: 1mm;
+            padding-right: 2mm;
+            padding-bottom: 0;
+            font-weight: 700;
+        }
+
+        .accountInfoText {
+            display: inline-block;
+            border: 1px solid #000;
+            ;
+            background-color: white;
+            width: 36mm;
+            height: 8mm;
+            border-radius: 5px;
+            margin: 1mm, 1mm, 0, 1mm;
+            overflow: hidden;
+            padding-top: 1mm;
+            padding-right: 2mm;
+            padding-bottom: 0;
+            box-sizing: border-box;
+        }
+
+        .accountInfoLine {
+        }
+
+
+
+
+
+        .serviceAddress {
+            position: relative;
+            top: 8.5cm;
+            width: 9.0cm;
+            height: 3cm;
+            left: 1cm;
+            border: 1px solid black;
+            overflow: hidden;
+            Color: white;
+        }
+
+        .paymentBox {
+            position: absolute;
+            top: 22.2cm;
+            left: 0cm;
+            right: 0;
+            bottom: 1cm;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .Regulatory {
+            position: absolute;
+            top: 19cm;
+            width: 9cm;
+            height: 3cm;
+            left: 1cm;
+            border: 1px solid black;
+            overflow: hidden;
+            background-color: wheat;
+        }
+
+        .meterGraph {
+            position: absolute;
+            top: 11cm;
+            width: 9cm;
+            height: 7.5cm;
+            left: 1cm;
+            border: 1px solid black;
+            overflow: hidden;
+            background-color: wheat;
+        }
+
+        .secondPageLogobox {
+            position: absolute;
+            top: 2mm;
+            width: 10cm;
+            height: 3cm;
+            right: 0cm;
+            border: 0px solid black;
+            overflow: hidden;
+        }
+
+        .secondPageLeftNmiBox {
+            position: absolute;
+            top: 2mm;
+            width: 10cm;
+            height: 3cm;
+            left: 1cm;
+            border: 0px solid black;
+            overflow: hidden;
+        }
+
+        .footerbox {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 1cm;
+            background-color: #2C365D;
+            color: white;
+            text-align: center;
+            font-size: x-small;
+            box-sizing: border-box;
+            padding-top: 3mm;
+        }
+
+        .boundarybox {
+            position: absolute;
+            top: 3cm;
+            left: 0cm;
+            right: 0cm;
+            bottom: 1cm;
+         
+            overflow: hidden;
+  
+            margin-bottom: 0.5cm;
+        }
+
+        .meterBox {
+            margin-top: 0cm;
+            margin-right: 1cm;
+            min-height: 1cm;
+            margin-left: 1cm;
+            border: 1px solid black;
+            font-size: small;
+            border-radius: 5px;
+            padding: 3px
+        }
+
+        .chargeDetailbox {
+            margin-top: 0.5cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            min-height: 16cm;
+            left: 3cm;
+           
+            overflow: hidden;
+           
+            font-size:small;
+        }
+
+
+        .leftsidebox {
+            position: absolute;
+            top: 9.5cm;
+            width: 9cm;
+            height: 12.3cm;
+            left: 1cm;
+            border: 1px solid black;
+            overflow: hidden;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        .chargeSummarybox {
+            position: absolute;
+            top: 9.5cm;
+            width: 9cm;
+            height: 12.3cm;
+            right: 1cm;
+            border: 1px solid black;
+            overflow: hidden;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        .ChargeLineTop {
+            font-size: small;
+            width: 100%;
+            height: 1cm;
+            overflow: hidden;
+            box-sizing: border-box;
+            padding-top: 3mm;
+            padding-left: 3mm;
+        }
+
+
+        .Period {
+            padding-left: 3mm;
+            font-size: small;
+            font-weight: bold;
+            text-align: left;
+            padding-top: 0mm;
+        }
+
+        .ChargeLineTopInvNum {
+            display: inline-block;
+            width: 4.6cm;
+        }
+
+        .ChargeLineTopIssued {
+            display: inline-block;
+            text-align: left;
+        }
+
+
+        .chargeSummarybox H1 {
+            margin-top: 4mm;
+            font-size: 5mm;
+            border-bottom: 1px grey solid;
+            padding-left: 3mm;
+        }
+
+        .ChargeLineOuter {
+            font-weight: 700;
+            padding-left: 3mm;
+            padding-right: 3mm;
+            background-color:;
+        }
+
+        .ChargeLineLabel {
+            display: inline-block;
+            text-align: left;
+            width: 5cm;
+            margin-right: 0px
+        }
+
+        .ChargeLineNumber {
+            display: inline-block;
+            text-align: right;
+            width: 3.2cm;
+            margin-left: 0px;
+        }
+
+        .ChargeLineLabelSingle {
+            display: inline-block;
+            text-align: left;
+            width: 8.2cm;
+            background-color: red;
+        }
+
+        .ChargeLineInner {
+            font-weight: 400;
+            margin-left: 3mm;
+            margin-right: 2mm;
+            margin-top: 2mm;
+            margin-bottom: 2mm;
+            border-top: solid 1px grey;
+            border-bottom: 1px solid gray;
+        }
+
+        .ChargeLineItem {
+            padding-left: 3mm;
+        }
+
+        .ChargeLineItemLabel {
+            display: inline-block;
+            text-align: left;
+            width: 5.6cm;
+        }
+
+        .ChargeLineItemNumber {
+            display: inline-block;
+            text-align: right;
+            width: 2.3cm;
+        }
+
+        .serviceAddress {
+            position: relative;
+            top: 3mm;
+            width: 8.3cm;
+            height: 2.1cm;
+            left: 3mm;
+            border: 0px solid black;
+            overflow: hidden;
+            Color: black;
+            font-size: small;
+        }
+
+        .serviceAddressHdr {
+            font-weight: 700;
+            font-size: medium;
+            border-bottom: 1px solid grey;
+            margin-bottom: 2mm;
+        }
+
+        .payboxarea {
+            position: relative;
+            top: 0.6cm;
+            left: 3mm;
+            ;
+            width: 8.3cm;
+        }
+
+        .payboxhdr {
+            font-weight: 700;
+            font-size: medium;
+            border-bottom: 1px solid grey;
+            margin-bottom: 2mm;
+        }
+
+        .paybox {
+            width: 3.1cm;
+            height: 2cm;
+            overflow: hidden;
+            margin-right: 1mm;
+            font-size: x-small;
+        }
+
+        .payboxcontainer {
+            position: relative;
+            top: 0.1cm;
+            left: 0mm;
+            width: 8.4cm;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .payboxpaytitle {
+            font-weight: 700;
+        }
+
+        .paybox img {
+            width: 1cm;
+            height: 1.2cm;
+            margin: 1mm;
+            margin-left: 0;
+            float: left;
+        }
+        .Interpreter {
+            position: relative;
+            top: 12mm;
+            width: 8.3cm;
+            height: 2.1cm;
+            left: 3mm;
+        }
+
+        table.datatable {
+            table-layout: fixed
+        }
+        .title { font-weight:700}
+    </style>
+</head>
+
+<body class="A4">
+    <div class="sheet FrontPage">
+        <div class="titleBox">Electricity Tax Invoice</div>
+        <div class="logobox"><img src="https://demopublic.blob.core.windows.net/tally-doc-man/tallyit/Assets/Img/logo374x105.png" /> </div>
+        <div class='addressBox'>
+            <div>{{upper BillingAddressBusinessName}}</div>
+            <div>{{upper BillingAddressBuildingName}}</div>
+            <div>{{upper BillingAddressLine1}}</div>
+            <div>{{upper BillingAddressLine2}}</div>
+            <div>{{upper BillingAddressLine3}}</div>
+            <div>{{upper BillingAddressCity}} {{upper BillingAddressState}} {{BillingAddressPostCode}}</div>
+
+        </div>
+
+        <div class='enquiriesBox'>
+            <div class='enquireLine'>
+                <div class='enquireLabel'>Faults:</div>
+                <div class='enquireItem'> {{  FaultsOnlyNumber  }}</div>
+            </div>
+            <div class='enquireLine'>
+                <div class='enquireLabel'>Emergency:</div>
+                <div class='enquireItem'>{{EmergencyOnlyNumber}}</div>
+            </div>
+            <div class='enquireLine'>
+                <div class='enquireLabel'>Account Enquiries:</div>
+                <div class='enquireItem'>Ewen Stewart</div>
+            </div>
+
+            <div class='enquireLine'>
+                <div class='enquireLabel'>Phone:</div>
+                <div class='enquireItem'>999 999 9999</div>
+            </div>
+            <div class='enquireLine'>
+                <div class='enquireLabel'>Web:</div>
+                <div class='enquireItem'><a style="color:white; text-decoration:none" href="Http://tallyit.com.au">http://tallyit.com.au</a></div>
+            </div>
+
+
+        </div>
+
+
+        <div class='accountinfoBox'>
+
+            <div class='accountInfoLine'>
+                <div class='accountInfoLabel'>Account</div>
+                <div class='accountInfoText'>{{AccountNumber}}</div>
+            </div>
+            <div class='accountInfoLine'>
+                <div class='accountInfoLabel'>NMI</div>
+                <div class='accountInfoText'>{{SiteRef}}-{{SiteRefCheckSum}}</div>
+            </div>
+            <div class='accountInfoLine'>
+
+                <div class='accountInfoLabel'>Due Date</div>
+                <div class='accountInfoText'>{{dateFormatUpper DueDate "dd MMM yyyy" CultureCode}}</div>
+
+            </div>
+
+            <div class='accountInfoLine'>
+                <div class='accountInfoLabel'>Amount Due</div>
+                <div class='accountInfoText'>{{decimalFormat ClosingBalance "C" CultureCode}}</div>
+            </div>
+
+        </div>
+
+        <div class=leftsidebox>
+
+
+            <div class="serviceAddress">
+                <div class="serviceAddressHdr">Service address</div>
+                <div>{{upper AccountName}}</div>
+                <div>{{upper SiteAddressBuildingName}}</div>
+                <div>{{upper SiteAddressLine1}}</div>
+                <div>{{upper SiteAddressLine2}} {{upper SiteAddressLine3}}</div>
+                <div>{{upper SiteAddressCity}} {{upper SiteAddressState}} {{SiteAddressPostCode}}</div>
+            </div>
+
+
+            <div class=payboxarea>
+
+                <div class="payboxhdr">Payment Methods</div>
+
+                <div class="payboxcontainer">
+                    <table style='width: 100%;'>
+                        <tr>
+
+                            {{#with PaymentMethod.BPay}}
+                            <td>
+                                <div class="paybox">
+                                    <div class='payboxleft'>
+                                        <img src="https://demopublic.blob.core.windows.net/tally-doc-man/energyaustralia/assets/img/bpoint.png">
+                                    </div>
+                                    <div class='payboxright'>
+                                        <div class="payboxpaytitle">BPOINT</div>
+                                        <div>Biller code: {{BillerCode}}</div>
+                                        <div>Ref: {{PaymentReference}}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="paybox">
+                                    <div class='payboxleft'>
+                                        <img src="https://demopublic.blob.core.windows.net/tally-doc-man/energyaustralia/assets/img/bpay.png">
+                                    </div>
+                                    <div class='payboxright'>
+                                        <div class="payboxpaytitle">BPAY</div>
+                                        <div>Biller code:{{BillerCode}} </div>
+                                        <div>Ref:{{PaymentReference}} </div>
+                                    </div>
+                                </div>
+                            </td>
+                            {{/with}}
+                        </tr>
+                        <tr>
+                            <td>
+                                {{#with PaymentMethod.EFT}}
+                                <div class="paybox">
+                                    <div class='payboxright'>
+                                        <div class="payboxpaytitle">EFT</div>
+                                        <div>Account Name</div>
+                                        <div>Tally Group</div>
+                                        <div>Ref:{{PaymentReference}} </div>
+                                    </div>
+                                </div>
+                                {{/with}}
+                            </td>
+                            <td>
+
+                                <div class="paybox">
+
+                                    <div class='payboxright'>
+                                        <div class="payboxpaytitle">Direct Debit</div>
+                                        <div>Biller code: 9999 </div>
+                                        <div>  Ref:  2354324254 </div>
+                                    </div>
+                                </div>
+
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            <div class="paybox">
+
+                                <div class='payboxright'>
+                                    <div class="payboxpaytitle">Credit Card</div>
+                                    <div>Please phone 344-324-233 </div>
+                                    <div>Fee's may apply </div>
+                                </div>
+                            </div>
+                                </td>
+                        </tr>
+                    </table>
+ 
+                 
+
+                  
+                   
+
+                  
+
+
+
+
+
+                </div>
+            </div>
+
+
+            <div class="Interpreter" >
+                <div  >
+                    <div  >
+                        <span style="font-weight:700">Interpreter Services 1300 622 718</span>
+                    </div>
+                    <img style="width:60mm" src="https://demopublic.blob.core.windows.net/tally-doc-man/energyaustralia/assets/img/inter_nsw_qld.png" />
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class='chargeSummarybox'>
+
+
+            <div class=ChargeLineTop>
+                <div class=ChargeLineTopInvNum>Invoice Number : <strong>{{InvoiceNumber}}</strong> </div>
+                <div class=ChargeLineTopIssued>Issued on : <strong>{{dateFormatUpper IssueDate "dd MMM yyyy" CultureCode}}</strong></div>
+            </div>
+
+            <div class="Period">
+                Period: {{dateFormatUpper PeriodFromDate "dd MMM yyyy" CultureCode}} TO {{dateFormatUpper PeriodToDate "dd MMM yyyy" CultureCode}}
+            </div>
+
+            <h1>Summary Of Charges</h1>
+
+            <div class=ChargeLineOuter>
+                <div class=ChargeLineLabel>Opening Balance</div>
+                <div class=ChargeLineNumber>{{decimalFormat OpeningBalance "C" CultureCode}}</div>
+            </div>
+
+            <div class=ChargeLineInner>
+
+                {{#each SummaryCharges}}
+                <div class=ChargeLineItem>
+                    <div class=ChargeLineItemLabel>{{CategoryText}}</div>
+                    <div class=ChargeLineItemNumber>{{decimalFormat Total "C" ../CultureCode}}</div>
+                </div>
+                {{/each}}
+
+
+
+
+            </div>
+
+            <div class=ChargeLineOuter>
+                <div class=ChargeLineLabel>Subtotal</div>
+                <div class=ChargeLineNumber>{{decimalFormat SubTotal "C" CultureCode}}</div>
+            </div>
+            <div class=ChargeLineOuter>
+                <div class=ChargeLineLabel>Tax (GST)</div>
+                <div class=ChargeLineNumber>{{decimalFormat TotalTax "C" CultureCode}}</div>
+            </div>
+
+
+            <div class=ChargeLineOuter>
+                <div class=ChargeLineLabel>Total Charges</div>
+                <div class=ChargeLineNumber>{{decimalFormat Total "C" CultureCode}}</div>
+            </div>
+
+
+            <div class=ChargeLineOuter style="margin-top:2mm">
+                <div class=ChargeLineLabel>Closing Balanace</div>
+                <div class=ChargeLineNumber>{{decimalFormat ClosingBalance "C" CultureCode}}</div>
+            </div>
+
+        </div>
+
+
+
+        <div class='paymentBox'>
+
+            <div id="usage-chart" class="chart-area" style="width: 70%; height: 100%; margin-top:1mm; display:inline-block ">
+            </div>
+            <div style="position:absolute; width:6cm; overflow:hidden; height:6.4cm; padding-top:5mm; top:0; right:0; font-size:x-small; padding-right: 5mm;">
+
+
+                <div>
+                    <span>
+                        Average daily use this bill:
+                    </span>
+                    <span style="float:right">
+                        {{#if AvgDailyUsage}}
+                        {{decimalFormat AvgDailyUsage  "N" CultureCode}}&nbsp;kWh
+                        {{else}}
+                        NA
+                        {{/if}}
+                    </span>
+                </div>
+                {{#if AvgDailyUsageSamePeriodLastYear}}
+                <div>
+                    <span>
+                        Average daily use same period last year:
+                    </span>
+                    <span style="float:right;">&nbsp;{{decimalFormat AvgDailyUsageSamePeriodLastYear  "N" CultureCode}}&nbsp;kWh</span>
+                </div>
+                {{/if}}
+                {{#if AvgPeakCostPerDay}}
+                <div>
+                    <span>
+                        Average peak energy cost per day :
+                    </span>
+                    <span style="float:right;">
+
+                        &nbsp;{{decimalFormat AvgPeakCostPerDay "C" CultureCode }}
+
+                    </span>
+                </div>
+                {{/if}}
+                {{#if AvgShoulderCostPerDay}}
+                <div>
+                    <span>
+                        Average shoulder energy cost per day :
+                    </span>
+                    <span style="float:right;">
+
+                        &nbsp;{{decimalFormat AvgShoulderCostPerDay "C" CultureCode }}
+
+                    </span>
+                </div>
+                {{/if}}
+                {{#if AvgOffPeakCostPerDay}}
+                <div>
+                    <span>
+                        Average off peak energy cost per day  :
+                    </span>
+                    <span style="float:right;">
+
+                        &nbsp;{{decimalFormat AvgOffPeakCostPerDay "C" CultureCode }}
+
+
+                    </span>
+                </div>
+                {{/if}}
+                <div>
+                    <span>
+                        Total greenhouse gas emissions  :
+                    </span>
+                    <span style="float:right">
+                        {{#if TotalGreenHouseEmissions}}
+                        {{decimalFormat TotalGreenHouseEmissions  "N" CultureCode}}&nbsp;tonnes
+                        {{else}}
+                        NA
+                        {{/if}}
+                    </span>
+                </div>
+
+                <div style="display: inline-block; vertical-align: top;">
+                    Actual Demand- {{decimalFormat ActualDemandKW  "N" CultureCode}} kW <br />
+                    Actual Demand- {{decimalFormat ActualDemandKVA "N" CultureCode}} kVA <br />
+                    Power Factor (at Max kW) - {{decimalFormat valueAttributes.PFatMaxKw "#0.0###"}}
+                </div>
+                <div style="display: inline-block; vertical-align: top;">
+                    DLF: Distribution loss factor &nbsp;&nbsp;&nbsp;( {{stringAttributes.DLFCode}}   {{decimalFormat valueAttributes.DistributionLossFactor "#0.0###"}} )<br />
+                    MLF: Marginal loss factor  &nbsp;&nbsp;&nbsp;( {{stringAttributes.TNICode}}   {{decimalFormat valueAttributes.MarginalLossFactor "#0.0###"}} )
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class='footerbox'>TallyGroup Pty Ltd   ABN 086 014 999</div>
+
+    </div>
+
+    <div class="sheet  SecondPage">
+        <div class="secondPageLeftNmiBox">NMI: 324234324-2</div>
+        <div class="secondPageLogobox">
+            <img src="https://demopublic.blob.core.windows.net/tally-doc-man/tallyit/Assets/Img/logowhite364x97.png" />;
+        </div>
+
+        <div class=boundarybox>
+            <div class="meterBox">
+
+                <table style="width:100%;">
+                    <tbody>
+                        <tr>
+                            <th style="text-align:left">Meter Number</th>
+                            <th style="text-align:center">Register</th>
+                            <th style="text-align:center">When</th>
+                            <th style="text-align:right" colspan="1">Index Reading</th>
+                            <th style="text-align:right">Read Type</th>
+                            <th style="text-align:right">Prev Reading</th>
+                            <th style="text-align:right">Multiplier</th>
+                            <th style="text-align:right">Total Usage</th>
+                        </tr>
+                        {{#each MeterReads}}
+                        <tr>
+                            <td style="text-align:left">{{MeterSerial}}</td>
+                            <td style="text-align:center">{{Register}}</td>
+                            <td style="text-align:center">{{dateFormat currReadDate "dd-MMM-yy"}}</td>
+                            <td style="text-align:right">{{CurrReadString}}</td>
+                            <td style="text-align:right">{{CurrQuality}}</td>
+                            <td style="text-align:right">{{PrevReadString}}</td>
+                            <td style="text-align:right">{{decimalFormat Factor1 "#0.0" }}</td>
+                            <td style="text-align:right">{{decimalFormat Qty "N" ../CultureCode}}&nbsp;{{Uom}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="chargeDetailbox">
+
+
+                <table class="datatable tableContent">
+                    <tbody>
+
+                        <tr>
+                            <td style="width:93mm; white-space:nowrap;text-align:right">Contracted Rate x (DLF x MLF)</td>
+                            <td style="width:26mm; text-align:right">Metered Rate</td>
+                            <td style="width:29mm; white-space:nowrap; text-align:right">Qty</td>
+                            <td style="width:30mm; white-space:nowrap; text-align:right">Cost</td>
+                        </tr>
+
+
+
+                    </tbody>
+                </table>
+
+                {{#each SummaryCharges}}
+                <div class="detail-data-area">
+                    <div class="title">
+                        {{CategoryText}}
+                        {{#if CategoryProductNames}}
+                        ({{CategoryProductNames}})
+                        {{/if}}
+                    </div>
+                    <table class="datatable tableContent">
+                        <tbody>
+                            {{#each LineItems}}
+                            <tr>
+                                <td style="width:41mm; white-space:nowrap;">{{BillText}} </td>
+                                {{#if CalcRate}}
+                                <td style="width:11mm; white-space:nowrap;text-align:right">{{decimalFormat Rate "##,0.0000" ../../CultureCode}}</td>
+                                <td style="width:10mm; white-space:nowrap;padding-left:1mm">{{RateUom}}</td>
+                                <td style="width:12mm; white-space:nowrap;">{{decimalFormat DLF "##,0.0000" ../../CultureCode}}</td>
+                                <td style="width:10mm; white-space:nowrap;">{{decimalFormat MLF "##,0.0000" ../../CultureCode}}</td>
+                                <td style="width:16mm; text-align:right">{{decimalFormat CalcRate "##,0.0000" ../../CultureCode}}</td>
+                                {{else}}
+                                <td style="width:11mm; white-space:nowrap;text-align:right"> &nbsp;</td>
+                                <td style="width:10mm; white-space:nowrap;padding-left:1mm"> &nbsp;</td>
+                                {{#if hasDLF}}
+                                <td style="width:10mm; white-space:nowrap;">{{decimalFormat DLF "##,0.0000" ../../CultureCode}}</td>
+                                {{else}}
+                                <td style="width:12mm; white-space:nowrap;"> &nbsp;</td>
+                                {{/if}}
+                                {{#if hasMLF}}
+                                <td style="width:10mm; white-space:nowrap;">{{decimalFormat MLF "##,0.0000" ../../CultureCode}}</td>
+                                {{else}}
+                                <td style="width:10mm; white-space:nowrap;"> &nbsp;</td>
+                                {{/if}}
+                                <td style="width:16mm; text-align:right">{{rateFormatted}}</td>
+                                {{/if}}
+                                <td style="width:18mm; white-space:nowrap;padding-left:1mm">{{rateUnitFormatted}}</td>
+                                <td style="width:22mm; white-space:nowrap; text-align:right">{{QtyFormatted}}</td>
+                                <td style="width:9mm; white-space:nowrap; padding-left:1mm">{{qtyUnitFormatted}}</td>
+                                <td style="width:20mm; white-space:nowrap; text-align:right">{{decimalFormat TotalDisplay "C" ../../CultureCode}}</td>
+                            </tr>
+                            {{/each}}
+                            <tr>
+                                <td style="font-weight: 700; width:45mm; white-space:nowrap;">{{AdditionalSummaryLineItem.BillText}} </td>
+                                <td style="width:11mm; white-space:nowrap;text-align:right"> &nbsp;</td>
+                                <td style="width:10mm; white-space:nowrap;padding-left:1mm"> &nbsp;</td>
+                                <td style="width:12mm; white-space:nowrap;"> &nbsp;</td>
+                                <td style="width:10mm; white-space:nowrap;"> &nbsp;</td>
+                                <td style="width:16mm; white-space:nowrap;text-align:right"> &nbsp;</td>
+                                <td style="width:14mm; white-space:nowrap;padding-left:1mm"> &nbsp;</td>
+                                <td style="font-weight: 700;width:22mm; white-space:nowrap;text-align:right;">{{decimalFormat AdditionalSummaryLineItem.Qty "N" ../CultureCode}}</td>
+                                <td style="font-weight: 700;width:11mm; white-space:nowrap;padding-left:1mm">{{AdditionalSummaryLineItem.QtyUom}}</td>
+                                <td style="font-weight: 700;width:16mm; white-space:nowrap; text-align:right">{{decimalFormat TotalDisplay "C" ../CultureCode}}</td>
+                            </tr>
+                            {{#if AdditionalSummaryLineItem.BillText}}
+                            <tr></tr>
+                            {{/if}}
+                        </tbody>
+                    </table>
+                </div>
+                {{/each}}
+                <div>
+                    {{#if showTaxIncRates}}
+                    <div style="text-align: right;font-weight:700 ; margin-right:2mm">
+                        <span >TOTAL THIS PERIOD (including GST of {{decimalFormat TotalTax "C" CultureCode}})</span>
+                        <span style="padding-left:5mm">{{decimalFormat Total "C" CultureCode}}</span>
+                    </div>
+                    {{else}}
+                    <div style="text-align: right; font-weight:700; margin-top:2mm;">
+                        <span  >SUBTOTAL</span>
+                        <span style="padding-left:5mm">
+                            {{decimalFormat SubTotal "C" CultureCode}}
+                        </span>
+                    </div>
+                    <div style="text-align: right;font-weight:700 ; margin-right:2mm" ">
+                        <span>GST</span>
+                        <span style="padding-left:5mm">{{decimalFormat TotalTax "C" CultureCode}}</span>
+                    </div>
+                    <div style="text-align: right;font-weight:700 ; margin-right:2mm" ">
+                        <span>TOTAL THIS PERIOD</span>
+                        <span style="padding-left:5mm">{{decimalFormat Total "C" CultureCode}}</span>
+                    </div>
+                    {{/if}}
+                </div>
+
+
+            </div>
+        </div>
+        <div class='footerbox'>TallyGroup Pty Ltd   ABN 086 014 999</div>
+
+
+
+ 
+
+    </div>
+
+    <div class="sheet OverflowPage">
+    </div>
+
+ 
+
+
+ 
+          
+       
+  
+
+    <script>
+             
+                    // based on prepared DOM, initialize echarts instance
+                    var myChart = echarts.init(document.getElementById('usage-chart'));
+                    // specify chart configuration item and data
+
+                    // TODO Decide if this should remain an array
+
+                    var chart = {{{ json UsageChart }}};
+
+                    //var colors = ["rgb(51,131,119)", "rgb(13,137,36)", "rgb(183,208,167)", "rgb(125,174,100)"];
+        var colors = ["#5F98DD", "#2c365d"
+                                    {{ #if UsageChart.hasShoulderValues }}, "#afb8d9"{{/if}}
+            {{#if UsageChart.hasOffpeakValues }}, "#d7dbec"{{/if}}
+                                  ];
+
+    var legendNames = ["Greenhouse gas emissions",
+        {{ #if UsageChart.hasOffpeakValues}}
+                    "Offpeak",
+        {{/if}}
+        {{#if UsageChart.hasShoulderValues }}
+                    "Shoulder",
+        {{/if}}
+                    "Peak"];
+                    var option = {
+
+                        animation: false,
+
+                        tooltip: {},
+
+                        legend: {
+                            data: legendNames
+                        },
+                        color: colors,
+                        grid: {
+                            containLabel: true
+                        },
+                        xAxis: {
+                            data: chart.categories,
+                            axisLabel: {
+                                show: true,
+                                interval: 0,
+                                rotate: -45
+                            }
+                        },
+                        yAxis: [
+                            {
+                                type: 'value',
+                                name: 'kWh',
+                                nameLocation: 'end',
+                                
+                            },
+                            {
+                                type: 'value',
+                                name: 'Co2 (tonnes)',
+                                nameLocation: 'end',
+                                
+                                splitLine: {
+                                    show: false
+                                }
+                            },
+                        ],
+                        series: [
+                            {
+                                name: 'Greenhouse gas emissions',
+                                type: 'line',
+                                stack: "line",
+                                yAxisIndex: 1,
+                                data: chart.co2Data,
+                                symbolSize: 6
+                            },
+                            {
+                                name: 'Peak',
+                                type: 'bar',
+                                stack: 'one',
+                                data: chart.peakData,
+                                itemStyle: {
+                                    borderWidth: 0.5,
+                                    borderColor: "rgba(1, 1, 1, 1)"
+                                }
+                            }
+                            {{ #if UsageChart.hasShoulderValues }}
+                                , {
+                                    name: 'Shoulder',
+                                    type: 'bar',
+                                    stack: 'one',
+                                    data: chart.shoulderData,
+                                    itemStyle: {
+                                        borderWidth: 0.5,
+                                        borderColor: "rgba(1, 1, 1, 1)"
+                                }
+                                },
+                           {{/if}}
+
+                            {{#if UsageChart.hasOffpeakValues }}
+                            ,{
+                                name: 'Offpeak',
+                                type: 'bar',
+                                stack: 'one',
+                                            data: chart.offPeakData,
+                                            itemStyle: {
+                                            borderWidth: 0.5,
+                                                borderColor: "rgba(1, 1, 1, 1)"
+                                        }
+                            }
+                            {{/if}}
+
+                        ]
+                    };
+                    // use configuration item and data specified to show chart
+                    myChart.setOption(option);
+       
+
+        //var dtlouter = window.document.getElementById("detailPageOuter");
+        //var dtloflow = window.document.getElementById("detailPageInnerOverflow");
+        //var dtloflowPage = window.document.getElementById("detailPageOverflow");
+
+
+        //overflow(dtlouter, dtloflow, dtloflowPage);
+
+
+        //var outer = window.document.getElementById("backPageOuter");
+        //var oflow = window.document.getElementById("backPageInnerOverflow");
+        //var oflowPage = window.document.getElementById("backPageOverflow");
+
+        //overflow(outer, oflow, oflowPage);
+
+        function overflow(elementFrom, elementTo, overflowPage) {
+            console.log(elementFrom);
+            console.log(elementTo);
+            console.log(overflowPage);
+
+            if (!elementFrom || !elementTo || !overflowPage) { return; }
+            console.log(elementFrom.clientHeight);
+            console.log(elementFrom.scrollHeight);
+
+
+            if (elementFrom.clientHeight >= elementFrom.scrollHeight) { return; }
+
+            while (elementFrom.clientHeight < elementFrom.scrollHeight) {
+                //    console.log(elementFrom.clientHeight);
+                //   console.log(elementFrom.scrollHeight);
+
+                var e = elementFrom.lastElementChild;
+                //  console.log(e);
+                if (!e) { break; }
+                elementTo.insertBefore(e, elementTo.firstElementChild);
+            }
+            overflowPage.style.display = "block";
+            return;
+        }
+
+    </script>
+
+</body>
+
+</html>

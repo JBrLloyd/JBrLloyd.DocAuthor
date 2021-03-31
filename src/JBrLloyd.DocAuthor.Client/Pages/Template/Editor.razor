@@ -1,0 +1,30 @@
+﻿@page "/template/editor"
+@using JBrLloyd.DocAuthor.Client.Services
+@inject TemplateService TemplateService
+
+@if (_initialTemplateValue == null)
+{
+    <em>Loading...</em>
+}
+else
+{
+    <MonacoEditor Id="any-id-string" CssClass="code-editor" ConstructionOptions="EditorConstructionOptions" />
+}
+
+@code {
+    private string _initialTemplateValue;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _initialTemplateValue = await TemplateService.GetDefaultTemplate();
+    }
+
+    private StandaloneEditorConstructionOptions EditorConstructionOptions(MonacoEditor editor)
+    {
+        return new StandaloneEditorConstructionOptions
+        {
+            Language = "html",
+            Value = _initialTemplateValue
+        };
+    }
+}
